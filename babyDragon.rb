@@ -9,9 +9,13 @@ class Dragon
     end
 
     def feed
-        puts @name + ': "Omnomnom!"'
-        @stuffInBelly = 10
-        timePass
+        if @stuffInBelly < 10
+            puts @name + ': "Omnomnom!"'
+            @stuffInBelly = 10
+            timePass
+        else
+            puts @name + ': "Neeee!"'
+        end
     end
 
     def walk
@@ -99,23 +103,38 @@ class Dragon
             puts @name + ': "Poo-poo-poo!"'
         end
     end
-
 end
 
-babyDragon = Dragon.new 'Rocky'
-babyDragon.toss
-babyDragon.toss
-babyDragon.rock
-babyDragon.putToBed
-babyDragon.feed
-babyDragon.walk
-babyDragon.toss
-babyDragon.toss
-babyDragon.toss
-babyDragon.toss
-babyDragon.toss
-babyDragon.toss
-babyDragon.walk
-babyDragon.toss
-babyDragon.toss
-babyDragon.toss
+puts 'What name would you choose for you baby dragon?'
+name = gets.chomp
+dragon = Dragon.new name
+
+puts 'Well congratulations! Now you have a baby dragon called ' + name + '!'
+puts 'Please choose what you would like to do with your little dragon:'
+puts 'Enter "feed", "walk", "put to bed", "toss" or "rock".'
+puts 'Enter "q" to quit the program'
+action = gets.chomp
+
+while action != 'q'
+    while ( action != 'feed' && action != 'walk' && action != 'put to bed' && action != 'toss' && action != 'rock' )
+        puts 'Enter "feed", "walk", "put to bed", "toss" or "rock".'
+        puts 'Enter "q" to quit the program'
+        action = gets.chomp
+    end
+
+    if action != 'q'
+        if action == 'feed'
+            dragon.feed
+        elsif action == 'walk'
+            dragon.walk
+        elsif action == 'put to bed'
+            dragon.putToBed
+        elsif action == 'toss'
+            dragon.toss
+        else
+            dragon.rock
+        end
+    end
+
+    action = gets.chomp
+end
